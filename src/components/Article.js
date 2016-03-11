@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
 
 class Article extends Component {
@@ -12,9 +13,17 @@ class Article extends Component {
         console.log('---', 'going to mount');
     }
 
+    componentDidMount() {
+        console.log('---', 'mounted to: ', this.refs.container);
+    }
+
+    componentDidUpdate() {
+        console.log('---', 'comments', findDOMNode(this.refs.comments));
+    }
+
     render() {
         return (
-            <div>
+            <div ref="container">
                 <a href = "#" onClick = {this.props.openArticle}>select</a>
                 {this.getTitle()}
                 {this.getBody()}
@@ -28,7 +37,7 @@ class Article extends Component {
         return (
             <div>
                 <p>{article.text}</p>
-                <CommentList comments = {article.comments || []} />
+                <CommentList ref= "comments" comments = {article.comments || []} />
             </div>
         )
     }

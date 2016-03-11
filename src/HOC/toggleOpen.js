@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component as ReactComponent} from 'react'
 
 export default (Component) => {
-    return class extends React.Component {
+    return class extends ReactComponent {
         state = {
             isOpen: false
         }
