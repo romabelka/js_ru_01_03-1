@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
+import { deleteArticle } from '../actions/articles'
 
 class Article extends Component {
     static propTypes = {
@@ -8,27 +9,19 @@ class Article extends Component {
         article: PropTypes.object.isRequired
     }
 
-
-    componentWillMount() {
-        console.log('---', 'going to mount');
-    }
-
-    componentDidMount() {
-        console.log('---', 'mounted to: ', this.refs.container);
-    }
-
-    componentDidUpdate() {
-        console.log('---', 'comments', findDOMNode(this.refs.comments));
-    }
-
     render() {
         return (
             <div ref="container">
-                <a href = "#" onClick = {this.props.openArticle}>select</a>
+                <a href = "#" onClick = {this.handleDelete}>delete</a>
                 {this.getTitle()}
                 {this.getBody()}
             </div>
         )
+    }
+
+    handleDelete = (ev) => {
+        ev.preventDefault()
+        deleteArticle(this.props.article.id)
     }
 
     getBody() {
