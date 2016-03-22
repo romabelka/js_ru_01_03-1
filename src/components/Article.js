@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
 import { deleteArticle, loadArticleById } from '../actions/articles'
-import { addComment } from '../actions/comments'
 
 class Article extends Component {
     static propTypes = {
@@ -46,13 +45,9 @@ class Article extends Component {
     }
 
     getCommentList() {
-        const { article } = this.props
-        const comments = article.getRelation('comments')
-        if (comments.includes(undefined)) return <h3>comments: {comments.length}</h3>
         return  <CommentList ref= "comments"
-                             comments = {comments}
-                             addComment = {this.addComment}/>
-
+                             article = {this.props.article}
+            />
     }
 
     addComment = (comment) => {

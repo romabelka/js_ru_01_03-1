@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher'
-import { ADD_COMMENT } from '../actions/constants'
+import { ADD_COMMENT, LOAD_COMMENTS_FOR_ARTICLE, _SUCCESS } from '../actions/constants'
 import SimpleStore from './SimpleStore'
 
 class Comment extends SimpleStore {
@@ -7,7 +7,7 @@ class Comment extends SimpleStore {
         super(stores, initialState)
 
         this.dispatchToken = AppDispatcher.register((action) => {
-            const { type, data } = action
+            const { type, data, response } = action
 
             switch (type) {
                 case ADD_COMMENT:
@@ -15,6 +15,10 @@ class Comment extends SimpleStore {
                         text: data.comment,
                         id: this.generateId()
                     })
+                    break;
+
+                case LOAD_COMMENTS_FOR_ARTICLE + _SUCCESS:
+                    response.forEach(this.__add)
                     break;
             }
         })
