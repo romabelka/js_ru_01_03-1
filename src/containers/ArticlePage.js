@@ -37,7 +37,6 @@ class ArticlePage extends Component {
         this.setState({
             article: articleStore.getById(id)
         })
-        console.log('---', 123);
     }
 
     render() {
