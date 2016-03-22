@@ -21,10 +21,11 @@ const CommentList = React.createClass({
         if (isOpen && !this.props.isOpen) loadCommentsForArticle({id: article.id})
     },
     render() {
-        const { isOpen, toggleOpen, article } = this.props
+        const { isOpen, toggleOpen, article,children } = this.props
         const actionText = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
+                {children}
                 <a href = "#" onClick = {toggleOpen}>{actionText}</a>
                 {this.getList()}
                 {this.getInput()}

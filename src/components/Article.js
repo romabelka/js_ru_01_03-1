@@ -47,7 +47,9 @@ class Article extends Component {
     getCommentList() {
         return  <CommentList ref= "comments"
                              article = {this.props.article}
-            />
+        >
+            <h3>Comments for article {this.props.article.id}</h3>
+        </CommentList>
     }
 
     addComment = (comment) => {
