@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import ArticleList from './ArticleList'
+import ArticleList from '../components/ArticleList'
 import { articleStore } from '../stores'
 
-class Container extends Component {
+class Articles extends Component {
     constructor() {
         super()
         this.state = {
@@ -37,4 +37,4 @@ class Container extends Component {
     }
 }
 
-export default Container
+export default Articles
