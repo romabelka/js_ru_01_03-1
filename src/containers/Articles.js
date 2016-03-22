@@ -32,6 +32,7 @@ class Articles extends Component {
         return (
             <div>
                 <ArticleList articles = {articles}/>
+                {this.props.children}
             </div>
         )
     }

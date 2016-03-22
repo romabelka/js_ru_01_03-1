@@ -9,14 +9,6 @@ class Article extends Component {
         article: PropTypes.object.isRequired
     }
 
-    componentWillReceiveProps(nextProps) {
-        const { article, isOpen } = nextProps
-        if (article.loaded || article.loading) return
-
-        if (isOpen && !this.props.isOpen) loadArticleById({id: article.id})
-    }
-
-
     render() {
         return (
             <div ref="container">
@@ -34,7 +26,6 @@ class Article extends Component {
 
     getBody() {
         const { article, isOpen } = this.props
-        if (!isOpen) return <noscript />
         if (article.loading) return <h3>Loading article</h3>
         return (
             <div>
