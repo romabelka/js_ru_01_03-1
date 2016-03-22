@@ -15,7 +15,7 @@ class ArticlePage extends Component {
     }
 
     componentDidMount() {
-        this.checkAndLoad()
+        this.checkAndLoad(this.state.article)
         articleStore.addChangeListener(this.articlesChanged)
     }
 
@@ -24,12 +24,11 @@ class ArticlePage extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.checkAndLoad()
+        this.checkAndLoad(articleStore.getById(nextProps.params.id))
         this.articlesChanged(nextProps)
     }
 
-    checkAndLoad = () => {
-        const { article } = this.state
+    checkAndLoad = (article) => {
         if (!article.loaded && !article.loading) setTimeout(() => loadArticleById({id: article.id}), 0)
     }
 
@@ -38,6 +37,7 @@ class ArticlePage extends Component {
         this.setState({
             article: articleStore.getById(id)
         })
+        console.log('---', 123);
     }
 
     render() {
