@@ -5,9 +5,14 @@ class Comment extends Component {
         comment: PropTypes.object
     };
 
+    static contextTypes = {
+        user: PropTypes.string
+    }
+
     render() {
         return (
             <div>
+                current user: {this.context.user}
                 <p>{this.props.comment.text}</p>
             </div>
         )

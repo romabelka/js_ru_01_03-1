@@ -12,8 +12,11 @@ export default (
     <Router history = {browserHistory}>
         <Route path="/" component = {App}>
             <Redirect from="article" to="articles" />
-            <Route path ="articles" component = {Articles}>
-                <Route path = "new" component = {NewArticle} />
+            <Route path ="articles" components = {Articles}>
+                <Route path = "new" component = {NewArticle}
+                    onEnter = {() => console.log('---', 'entering route new')}
+                    onLeave = {() => console.log('---', 'leaving route new')}
+                />
                 <Route path = ":id" component = {ArticlePage} />
             </Route>
             <Route path="comments" component = {CommentsIndex}>
