@@ -3,6 +3,12 @@ import {findDOMNode} from 'react-dom'
 import CommentList from './CommentList'
 import { deleteArticle, loadArticleById } from '../actions/articles'
 
+function isEqual(obj1, obj2) {
+
+    //todo implement
+    return false
+}
+
 class Article extends Component {
     static propTypes = {
         isOpen: PropTypes.bool,
@@ -17,6 +23,10 @@ class Article extends Component {
                 {this.getBody()}
             </div>
         )
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !isEqual(nextProps, this.props)
     }
 
     handleDelete = (ev) => {
