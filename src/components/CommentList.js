@@ -14,6 +14,11 @@ const CommentList = React.createClass({
             comment: ''
         }
     },
+    contextTypes: {
+        vocabulary: PropTypes.object,
+        lang: PropTypes.string,
+        user: PropTypes.string
+    },
     componentWillReceiveProps(nextProps) {
         const { article, isOpen } = nextProps
         if (article.loadedComments || article.loadingComments) return
@@ -22,7 +27,9 @@ const CommentList = React.createClass({
     },
     render() {
         const { isOpen, toggleOpen, article,children } = this.props
-        const actionText = isOpen ? 'hide comments' : 'show comments'
+        const {vocabulary, lang} = this.context
+
+        const actionText = isOpen ? vocabulary.hideComments[lang] : vocabulary.showComments[lang]
         return (
             <div>
                 {children}
@@ -33,10 +40,11 @@ const CommentList = React.createClass({
         )
     },
     getInput() {
+        const {vocabulary, lang} = this.context
         if (!this.props.isOpen) return null
         return <div>
             <input valueLink={this.linkState("comment")}/>
-            <a href = "#" onClick = {this.addComment}>add comment</a>
+            <a href = "#" onClick = {this.addComment}>{vocabulary.addComment[lang]}</a>
         </div>
     },
 
@@ -51,7 +59,9 @@ const CommentList = React.createClass({
 
     addComment(ev) {
         ev.preventDefault()
-        addComment(this.props.article.id, this.state.comment)
+        let user = this.context.user || 'unknown';
+        let comment = `${this.state.comment} by ${user}`;
+        addComment(comment, this.props.article.id)
         this.setState({
             comment: ''
         })

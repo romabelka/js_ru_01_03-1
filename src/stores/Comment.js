@@ -14,6 +14,7 @@ class Comment extends SimpleStore {
 
             switch (type) {
                 case ADD_COMMENT:
+                    console.log(this.generateId())
                     this.__add({
                         text: data.comment,
                         id: this.generateId()

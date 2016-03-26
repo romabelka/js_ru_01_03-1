@@ -5,10 +5,17 @@ class NewArticle extends Component {
 
     };
 
+    static contextTypes = {
+        vocabulary: PropTypes.object,
+        lang: PropTypes.string
+    }
+
     render() {
+        const {vocabulary, lang} = this.context
+
         return (
             <div>
-                <h2>New Article</h2>
+                <h2>{vocabulary.newArticle[lang]}</h2>
             </div>
         )
     }

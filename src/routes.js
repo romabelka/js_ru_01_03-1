@@ -8,6 +8,7 @@ import CommentsIndex from './containers/CommentIndex'
 import CommentsPaginationPage from './containers/CommentsPaginationPage'
 import NotFound from './containers/NotFound'
 import history from './history'
+import { userStore } from './stores'
 
 export default (
     <Router history = {history}>
@@ -15,7 +16,7 @@ export default (
             <Redirect from="article" to="articles" />
             <Route path ="articles" components = {Articles}>
                 <Route path = "new" component = {NewArticle}
-                    onEnter = {() => console.log('---', 'entering route new')}
+                    onEnter = {(nextState, transition) => auth(nextState, transition)}
                     onLeave = {() => console.log('---', 'leaving route new')}
                 />
                 <Route path = ":id" component = {ArticlePage} />
@@ -28,3 +29,11 @@ export default (
         </Route>
     </Router>
 )
+
+function auth(nextState, transition) {
+    let currentUser = userStore.getCurrentUser();
+    if ( !currentUser ) {
+        transition('/articles');
+        return false;
+    }
+}

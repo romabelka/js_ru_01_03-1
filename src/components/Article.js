@@ -15,10 +15,17 @@ class Article extends Component {
         article: PropTypes.object.isRequired
     }
 
+    static contextTypes = {
+        vocabulary: PropTypes.object,
+        lang: PropTypes.string
+    }
+
     render() {
+        const {vocabulary, lang} = this.context
+
         return (
             <div ref="container">
-                <a href = "#" onClick = {this.handleDelete}>delete</a>
+                <a href = "#" onClick = {this.handleDelete}>{vocabulary.deletion[lang]}</a>
                 {this.getTitle()}
                 {this.getBody()}
             </div>
@@ -53,9 +60,9 @@ class Article extends Component {
         </CommentList>
     }
 
-    addComment = (comment) => {
-        addComment(comment, this.props.article.id)
-    }
+    //addComment = (comment) => {
+    //    addComment(comment, this.props.article.id)
+    //}
 
     getTitle() {
         const { article: { title }, openArticle  } = this.props

@@ -5,14 +5,14 @@ import { asyncAC } from './api/utils'
 import history  from '../history'
 
 export function addComment(comment, articleId) {
-/*
+
     AppDispatcher.dispatch({
         type: ADD_COMMENT,
         data: {comment, articleId}
     })
 
-*/
-    history.replace('/articles/new')
+
+    //history.replace('/articles/new')
 }
 
 export const loadCommentForPage = asyncAC(loadForPage, LOAD_COMMENTS_FOR_PAGE)

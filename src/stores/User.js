@@ -12,6 +12,7 @@ class Comment extends SimpleStore {
             switch (type) {
                 case SIGN_IN:
                     this.currentUser = data.name
+                    this.addUserToStorageIfNotExists();
                     break;
 
                 default: return
@@ -21,6 +22,31 @@ class Comment extends SimpleStore {
         })
     }
 
+    addUserToStorageIfNotExists() {
+        let users = localStorage.getItem('users');
+
+        if ( !users ) {
+            let ar = [];
+            ar.push(this.currentUser);
+            localStorage.setItem('users', JSON.stringify(ar));
+            return;
+        }
+
+        users = JSON.parse(users);
+
+        if ( !users.includes(this.currentUser) ) {
+            users.push(this.currentUser);
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+    }
+
+    getCurrentUser() {
+        return this.currentUser;
+    }
+
+    getUsers() {
+        return JSON.parse(localStorage.getItem('users')) || [];
+    }
 }
 
 export default Comment
